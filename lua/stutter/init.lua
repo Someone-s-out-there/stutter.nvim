@@ -6,7 +6,6 @@ local M = {}
 local options = {}
 local prevchars = ""
 local prevchars_count = 10
-local stutterState = true
 
 local function parser(char)
     for _, pattern in pairs(options.patterns) do
@@ -18,7 +17,7 @@ local function parser(char)
 end
 
 local function onkeycallback(char)
-    if not stutterState and not vim.api.nvim_get_mode().mode == "i" then
+    if (not command.stutterstate) or (not vim.api.nvim_get_mode().mode == "i") then
         return
     end
 
