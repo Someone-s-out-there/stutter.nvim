@@ -1,5 +1,7 @@
 # README
 
+## WARNING this project is WIP and not really for general use
+
 This plugin for neovim allows the mapping of key combinations in insert mode to provide a different character e.g. '..'  => '>'
 
 ## Installation
