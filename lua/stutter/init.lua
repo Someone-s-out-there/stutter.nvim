@@ -19,6 +19,8 @@ local function onkeycallback(char)
         prevchars = string.sub(prevchars, 1, -5)
     end
 
+    local buffer_lang = vim.bo[vim.api.nvim_get_current_buf()].filetype ---@type string
+
     parser.parser(prevchars, options)
 
     if string.len(prevchars) >= prevchars_count then
