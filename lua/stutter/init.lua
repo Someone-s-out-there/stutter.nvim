@@ -1,10 +1,14 @@
-local commands = require("lua.stutter.commands")
+require("stutter.string_util")
+local commands = require("stutter.commands")
 
 local M = {}
-local prevchar = nil
+local options = {}
+local prevchars = ""
+local prevchars_count = 5
+local stutterState = true
 
 local function parser(char)
-    if char == "#" and prevchar == "#" then
+    if prevchars:endswith(options.patterns[1][1]) then
         vim.api.nvim_input("<BS><BS>test")
     end
 end
@@ -31,12 +35,10 @@ local function onkeycallback(char)
 end
 
 function M.setup(opts)
+    options = opts
     commands.command_creation()
 
-    local stutterState = true
-    vim.on_key(function(char)
-        parser(char)
-    end)
-
-    print("plugin/example.lua is executed!")
+    vim.on_key(onkeycallback)
 end
+
+return M
