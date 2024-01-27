@@ -8,6 +8,8 @@ local options = {}
 local prevchars = ""
 local prevchars_count = 10
 
+--- on keypress callback function
+---@param char number which has been pressed
 local function onkeycallback(char)
     if (not command.stutterstate) or (not vim.api.nvim_get_mode().mode == "i") then
         return
@@ -20,14 +22,17 @@ local function onkeycallback(char)
     end
 
     local buffer_lang = vim.bo[vim.api.nvim_get_current_buf()].filetype ---@type string
+    print(buffer_lang .. ":" .. prevchars .. "  ")
 
     parser.parser(prevchars, options, buffer_lang)
 
     if string.len(prevchars) >= prevchars_count then
-        prevchars = string.sub(prevchars, -10)
+        prevchars = string.sub(prevchars, -10) --get last 10 chars
     end
 end
 
+--- setup the plugin with parameter opts
+---@param opts table
 function M.setup(opts)
     options = opts
 
