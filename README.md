@@ -23,8 +23,10 @@ you should pass it into the setup like the following
 ``` lua
 
 require('stutter').setup({
-    {";;",":"},
-    {":;",":="},
+    {";;",":" ,"vhdl"},
+    {":;",":=","vhdl"},
+    {",,","<LT>=","vhdl"}, -- < are dangerous use <LT> as replacement
+    {"..","=>","vhdl"},
     })
 
 ```
